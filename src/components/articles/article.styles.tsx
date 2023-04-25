@@ -4,19 +4,14 @@ export const useStyles = createStyles((theme) => ({
   styledGroup: {
     width: "100%",
     display: "flex",
-    flexDirection: "column",
-    gap: "18px",
+    padding: "20px 140px",
     cursor: "default",
   },
   title: {
     color: "#212121",
-    fontSize: "66px",
+    fontSize: "160px",
+    lineHeight: "200px",
     fontWeight: 900,
     letterSpacing: "-3px",
-  },
-  text: {
-    color: "#ffff",
-    fontSize: "26px",
-    fontWeight: 500,
   },
 }));

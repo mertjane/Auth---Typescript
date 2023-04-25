@@ -1,6 +1,7 @@
 import React from "react";
 import { GiGorilla } from "react-icons/gi";
-import { HeaderContainer, useStyles } from "../../global.styles";
+import { HeaderContainer } from "../../global.styles";
+import { useStyles } from "./header.styles";
 import { Title } from "@mantine/core";
 
 export default function Header() {

@@ -2,17 +2,26 @@ import { createStyles } from "@mantine/core";
 
 export const useStyles = createStyles((theme) => ({
   styledGroup: {
-    width: "480px",
+    width: "27%",
+    height: "100%",
+    zIndex: 99,
     backgroundColor: "#ffff",
     boxShadow:
       "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
-    borderRadius: "10px",
+    borderRadius: "10px 0 0 10px",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "flex-start",
+    "@media only screen and (max-width: 1600px)": {
+      width: "550px",
+      height: "670px",
+      borderRadius: "10px",
+    },
     "@media only screen and (max-width: 768px)": {
       width: "100%",
+      height: "100vh",
+      borderRadius: 0,
     },
   },
   wrapper: {
@@ -22,10 +31,15 @@ export const useStyles = createStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
+    paddingTop: "140px",
     gap: 10,
+    marginBottom: "80px",
+    "@media only screen and (max-width: 1600px)": {
+      paddingTop: "40px",
+    },
     "@media only screen and (max-width: 768px)": {
-      height: "100vh",
+      padding: "140px 20px 26px 20px",
     },
   },
   title: {
@@ -99,10 +113,12 @@ export const useStyles = createStyles((theme) => ({
     margin: 0,
     borderTop: "1px solid #dddd",
     display: "flex",
+    position: "absolute",
+    bottom: 0,
     alignItems: "center",
     justifyContent: "center",
     "@media only screen and (max-width: 768px)": {
-      height: "40px",
+      height: "60px",
     },
   },
   styledText: {

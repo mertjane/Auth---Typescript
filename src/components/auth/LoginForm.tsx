@@ -59,67 +59,76 @@ export default function LoginForm({
   };
 
   return (
-    <>
-      <div className={classes.wrapper}>
-        <h1 className={classes.title}>
-          Login
-          <span
-            style={{
-              marginLeft: "3px",
-              border: "3px solid #008ef4",
-              width: "23%",
-            }}
-          />
-        </h1>
-        <TextInput
-          type="email"
-          className={classes.input}
-          size="md"
-          placeholder="Email"
-          value={value}
-          onChange={handleInput}
-          error={showError ? "john@example.com" : ""}
+    <div className={classes.wrapper}>
+      <h1 className={classes.title}>
+        Login
+        <span
+          style={{
+            marginLeft: "3px",
+            border: "3px solid #008ef4",
+            width: "23%",
+          }}
         />
-        <PasswordInput
-          className={classes.passwordInput}
-          placeholder="Password"
-          error={passwordError}
-          size="md"
-          onChange={handlePasswordChange}
-          value={password}
-        />
-        <Button size="lg" className={classes.submitBtn}>
-          Login
-        </Button>
-        <Divider
-          className={classes.styledDivider}
-          variant="solid"
-          my="xs"
-          label="Or"
-          labelPosition="center"
-        />
-        <Button
-          size="lg"
-          className={classes.styledFacebookBtn}
-          leftIcon={
-            <>
-              <FaFacebook size="1.7rem" />
-              <span className={classes.buttonText}>Login with Facebook</span>
-            </>
-          }
-        />
-        <Button
-          variant="outline"
-          className={classes.styledGoogleBtn}
-          size="lg"
-          leftIcon={
-            <>
-              <FcGoogle size="1.7rem" />
-              <span className={classes.buttonText}>Login with Google</span>
-            </>
-          }
-        />
-      </div>
+      </h1>
+      <TextInput
+        type="email"
+        className={classes.input}
+        size="md"
+        placeholder="Email"
+        value={value}
+        onChange={handleInput}
+        error={showError ? "john@example.com" : ""}
+      />
+      <PasswordInput
+        className={classes.passwordInput}
+        placeholder="Password"
+        error={passwordError}
+        size="md"
+        onChange={handlePasswordChange}
+        value={password}
+      />
+      <Text
+        style={{
+          alignSelf: "start",
+          color: "#298bd1",
+          fontWeight: 400,
+          fontSize: "14px",
+          cursor: "pointer",
+        }}
+      >
+        Forgot password?
+      </Text>
+      <Button size="lg" className={classes.submitBtn}>
+        Login
+      </Button>
+      <Divider
+        className={classes.styledDivider}
+        variant="solid"
+        my="xs"
+        label="Or"
+        labelPosition="center"
+      />
+      <Button
+        size="lg"
+        className={classes.styledFacebookBtn}
+        leftIcon={
+          <>
+            <FaFacebook size="1.7rem" />
+            <span className={classes.buttonText}>Login with Facebook</span>
+          </>
+        }
+      />
+      <Button
+        variant="outline"
+        className={classes.styledGoogleBtn}
+        size="lg"
+        leftIcon={
+          <>
+            <FcGoogle size="1.7rem" />
+            <span className={classes.buttonText}>Login with Google</span>
+          </>
+        }
+      />
       <Flex className={classes.flexBox}>
         <Text className={classes.styledText} size="sm">
           {loginPage === false
@@ -130,6 +139,6 @@ export default function LoginForm({
           </span>
         </Text>
       </Flex>
-    </>
+    </div>
   );
 }

@@ -6,7 +6,7 @@ import {
 } from "@mantine/core";
 import { CustomFonts } from "./styles/CustomFonts";
 import Auth from "./pages/Auth";
-import { Container, providerStyle } from "./global.styles";
+import { BodyContainer, Container, providerStyle } from "./global.styles";
 import AuthHeader from "./components/header/Header";
 import AuthFooter from "./components/footer/Footer";
 import Articles from "./components/articles/Articles";
@@ -22,11 +22,13 @@ export default function App() {
       toggleColorScheme={toggleColorScheme}
     >
       <MantineProvider theme={providerStyle} withGlobalStyles withNormalizeCSS>
+        <CustomFonts />
         <Container>
           <AuthHeader />
-          <CustomFonts />
-          <Auth />
-          <Articles />
+          <BodyContainer>
+            <Articles />
+            <Auth />
+          </BodyContainer>
           <AuthFooter />
         </Container>
       </MantineProvider>

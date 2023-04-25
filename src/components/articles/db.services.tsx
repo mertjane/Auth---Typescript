@@ -25,12 +25,12 @@ export const services = [
       "We use Agile development methodologies to deliver software quickly and efficiently, while maintaining high quality standards.",
   },
   {
-    title: "Continuous Integration and Deployment",
+    title: "Continuous Integration",
     description:
       "We help automate your software delivery pipeline with continuous integration and deployment, allowing you to release new features faster.",
   },
   {
-    title: "Scalable and Resilient Software Solutions",
+    title: "Scalable Software Solutions",
     description:
       "We design and build software solutions that are both scalable and resilient, ensuring your applications can handle high traffic loads and remain operational even in the event of failures.",
   },

@@ -1,17 +1,31 @@
-import React from "react";
 import { GiGorilla } from "react-icons/gi";
 import { HeaderContainer } from "../../global.styles";
 import { useStyles } from "./header.styles";
-import { Title } from "@mantine/core";
+import { Group, Title, useMantineTheme, Button } from "@mantine/core";
+import { useSelector } from "react-redux";
 
 export default function Header() {
+  const theme = useMantineTheme();
   const { classes } = useStyles();
+  const { auth } = useSelector((state: any) => state);
   return (
     <HeaderContainer>
-      <GiGorilla size={45} className={classes.styledLogo} />
-      <Title className={classes.styledBrand} order={1}>
-        SmartApe
-      </Title>
+      <Group>
+        <GiGorilla size={45} className={classes.styledLogo} />
+        <Title className={classes.styledBrand} order={1}>
+          SmartApe
+        </Title>
+      </Group>
+      {auth.id ? (
+        <Group>
+          <Button variant="filled" color={theme.primaryColor}>
+            Logout
+          </Button>
+          ;
+        </Group>
+      ) : (
+        <></>
+      )}
     </HeaderContainer>
   );
 }

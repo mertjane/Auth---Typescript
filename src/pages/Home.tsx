@@ -1,7 +1,5 @@
-import React from "react";
+import { HomeContainer } from "../global.styles";
 
-type Props = {};
-
-export default function Home({}: Props) {
-  return <div>Home</div>;
+export default function Home() {
+  return <HomeContainer></HomeContainer>;
 }

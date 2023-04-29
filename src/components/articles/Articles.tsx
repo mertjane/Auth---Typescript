@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Flex, Mark, Title, Transition } from "@mantine/core";
 import { services } from "./db.services";
-import { ArticleContainer } from "../../global.styles";
 import { useStyles } from "./article.styles";
 
 export interface Service {
@@ -33,24 +32,22 @@ export default function Articles() {
   }, []);
 
   return (
-    <ArticleContainer>
-      <Flex className={classes.styledGroup}>
-        <Transition
-          mounted={titleIsMounted}
-          transition="skew-up"
-          duration={400}
-          timingFunction="ease"
-        >
-          {(styles) => (
-            <Title style={styles} className={classes.title}>
-              {currentService.title.slice(0, 10)}
-              <Mark style={styles} bg="#ffd166">
-                {currentService.title.slice(10)}
-              </Mark>
-            </Title>
-          )}
-        </Transition>
-      </Flex>
-    </ArticleContainer>
+    <Flex className={classes.styledGroup}>
+      <Transition
+        mounted={titleIsMounted}
+        transition="skew-up"
+        duration={400}
+        timingFunction="ease"
+      >
+        {(styles) => (
+          <Title style={styles} className={classes.title}>
+            {currentService.title.slice(0, 10)}
+            <Mark style={styles} bg="#d74e09">
+              {currentService.title.slice(10)}
+            </Mark>
+          </Title>
+        )}
+      </Transition>
+    </Flex>
   );
 }

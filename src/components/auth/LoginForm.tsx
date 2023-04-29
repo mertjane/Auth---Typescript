@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import {
   TextInput,
   PasswordInput,
@@ -10,7 +11,10 @@ import {
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { useStyles } from "./form.styles";
-import { ERROR_MESSAGES } from "./auth.utils";
+import { LoginUser } from "../../types/types";
+import { useDispatch } from "react-redux";
+import { loggedInUser } from "../../redux/auth/auth.service";
+import { useSelector } from "react-redux";
 
 interface FormProps {
   loginPage: boolean;
@@ -18,48 +22,40 @@ interface FormProps {
   handlePageSwitch: () => void;
 }
 
-export default function LoginForm({
-  loginPage,
-  setLoginPage,
-  handlePageSwitch,
-}: FormProps) {
-  const [value, setValue] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [passwordError, setPasswordError] = useState<string>("");
-
+export default function LoginForm({ loginPage, handlePageSwitch }: FormProps) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { classes } = useStyles();
+  const { auth } = useSelector((state: any) => state);
+  const { loginError } = useSelector((state: any) => state.auth);
+  const [user, setUser] = useState<LoginUser>({
+    email: "",
+    password: "",
+  });
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const handleInput = (e: any) => {
-    setValue(e.target.value);
-  };
+  useEffect(() => {
+    if (auth.id) {
+      navigate("/");
+    }
+  }, [auth.id, navigate]);
 
-  const showError = value.length > 0 && value.length < 5;
+  const handleSubmit = async () => {
+    setIsLoading(true);
 
-  const handlePasswordChange = (e: any) => {
-    const value = e.target.value;
-    setPassword(value);
-    setPasswordError(getPasswordError(value));
-  };
-
-  const getPasswordError = (password: string) => {
-    if (password === "") {
-      return ERROR_MESSAGES.EMPTY;
+    if (user.email === "" || user.password === "") {
+      return setIsLoading(false);
     }
-    if (password.length < 8) {
-      return ERROR_MESSAGES.SHORT;
-    }
-    if (password.length > 24) {
-      return ERROR_MESSAGES.LONG;
-    }
-    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,24}$/;
-    if (!regex.test(password)) {
-      return ERROR_MESSAGES.NOT_MATCH;
-    }
-    return "";
+    dispatch(loggedInUser({ user }) as any);
+    setTimeout(() => {
+      setUser({ email: "", password: "" });
+      setIsLoading(false);
+      navigate("/");
+    }, 2000);
   };
 
   return (
-    <div className={classes.wrapper}>
+    <>
       <h1 className={classes.title}>
         Login
         <span
@@ -74,31 +70,26 @@ export default function LoginForm({
         type="email"
         className={classes.input}
         size="md"
-        placeholder="Email"
-        value={value}
-        onChange={handleInput}
-        error={showError ? "john@example.com" : ""}
+        placeholder="Email or username"
+        value={user.email}
+        onChange={(e) => setUser({ ...user, email: e.target.value })}
+        error={loginError.message}
       />
       <PasswordInput
         className={classes.passwordInput}
         placeholder="Password"
-        error={passwordError}
+        value={user.password}
+        onChange={(e) => setUser({ ...user, password: e.target.value })}
+        // error={passwordError}
         size="md"
-        onChange={handlePasswordChange}
-        value={password}
       />
-      <Text
-        style={{
-          alignSelf: "start",
-          color: "#298bd1",
-          fontWeight: 400,
-          fontSize: "14px",
-          cursor: "pointer",
-        }}
+      <Text className={classes.forgetPwdText}>Forgot password?</Text>
+      <Button
+        onClick={handleSubmit}
+        loading={isLoading}
+        size="lg"
+        className={classes.submitBtn}
       >
-        Forgot password?
-      </Text>
-      <Button size="lg" className={classes.submitBtn}>
         Login
       </Button>
       <Divider
@@ -133,12 +124,12 @@ export default function LoginForm({
         <Text className={classes.styledText} size="sm">
           {loginPage === false
             ? "Already have an account?"
-            : "Don't you have an account?"}
+            : "Don't have an account?"}
           <span onClick={handlePageSwitch} className={classes.switchBtn}>
             {loginPage === false ? " Login" : " Signup"}
           </span>
         </Text>
       </Flex>
-    </div>
+    </>
   );
 }

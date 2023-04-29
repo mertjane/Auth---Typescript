@@ -1,11 +1,47 @@
 import { createStyles } from "@mantine/core";
 
 export const useStyles = createStyles((theme) => ({
-  styledGroup: {
-    width: "27%",
+  registerGroup: {
     height: "100%",
-    zIndex: 99,
+    width: "504px",
     backgroundColor: "#ffff",
+    position: "fixed",
+    right: 0,
+    top: 0,
+    boxShadow:
+      "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
+    borderRadius: "10px 0 0 10px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    padding: "80px 40px",
+    "@media only screen and (max-width: 1600px)": {
+      width: "550px",
+      height: "100%",
+      //minHeight: "750px",
+      borderRadius: "10px",
+      position: "relative",
+      padding: "20px 40px",
+    },
+    "@media only screen and (max-width: 768px)": {
+      width: "100%",
+      height: "100%",
+      borderRadius: 0,
+    },
+    "@media only screen and (max-height: 900px)": {
+      padding: "0 40px",
+      height: "100vh",
+    },
+  },
+  loginGroup: {
+    height: "100%",
+    width: "504px",
+    backgroundColor: "#ffff",
+    position: "fixed",
+    right: 0,
+    top: 0,
+    padding: "80px 40px",
     boxShadow:
       "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
     borderRadius: "10px 0 0 10px",
@@ -15,31 +51,20 @@ export const useStyles = createStyles((theme) => ({
     justifyContent: "flex-start",
     "@media only screen and (max-width: 1600px)": {
       width: "550px",
-      height: "670px",
+      height: "675px",
+      //minHeight: "750px",
       borderRadius: "10px",
+      position: "relative",
+      padding: "20px 40px",
     },
     "@media only screen and (max-width: 768px)": {
       width: "100%",
-      height: "100vh",
+      height: "100%",
       borderRadius: 0,
     },
-  },
-  wrapper: {
-    padding: "0 40px 26px 40px",
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    paddingTop: "140px",
-    gap: 10,
-    marginBottom: "80px",
-    "@media only screen and (max-width: 1600px)": {
-      paddingTop: "40px",
-    },
-    "@media only screen and (max-width: 768px)": {
-      padding: "140px 20px 26px 20px",
+    "@media only screen and (max-height: 900px)": {
+      padding: "0 40px",
+      height: "100vh",
     },
   },
   title: {
@@ -68,6 +93,13 @@ export const useStyles = createStyles((theme) => ({
       "::placeholder": {
         fontWeight: 500,
       },
+    },
+  },
+  showBtn: {
+    opacity: 0.5,
+    cursor: "pointer",
+    ":hover": {
+      opacity: 0.8,
     },
   },
   submitBtn: {
@@ -117,8 +149,22 @@ export const useStyles = createStyles((theme) => ({
     bottom: 0,
     alignItems: "center",
     justifyContent: "center",
+    "@media only screen and (max-width: 1600px)": {
+      height: "55px",
+    },
     "@media only screen and (max-width: 768px)": {
       height: "60px",
+    },
+  },
+  forgetPwdText: {
+    alignSelf: "start",
+    color: "#298bd1",
+    fontWeight: 400,
+    fontSize: "14px",
+    cursor: "pointer",
+    opacity: 0.8,
+    ":hover": {
+      opacity: 1,
     },
   },
   styledText: {

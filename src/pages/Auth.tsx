@@ -24,23 +24,25 @@ export default function Auth() {
       duration={300}
       timingFunction="ease"
     >
-      {(styles) => (
-        <Group className={classes.styledGroup} style={styles}>
-          {loginPage === true ? (
+      {(styles) =>
+        loginPage === true ? (
+          <Group className={classes.loginGroup} style={styles}>
             <LoginForm
               handlePageSwitch={handlePageSwitch}
               loginPage={loginPage}
               setLoginPage={setLoginPage}
             />
-          ) : (
+          </Group>
+        ) : (
+          <Group className={classes.registerGroup} style={styles}>
             <RegisterForm
               handlePageSwitch={handlePageSwitch}
               loginPage={loginPage}
               setLoginPage={setLoginPage}
             />
-          )}
-        </Group>
-      )}
+          </Group>
+        )
+      }
     </Transition>
   );
 }

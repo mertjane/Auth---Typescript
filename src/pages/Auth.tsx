@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Group, Transition } from "@mantine/core";
-import { useStyles } from "../components/auth/form.styles";
+import { useFormStyles } from "../components/auth/form.styles";
 import RegisterForm from "../components/auth/RegisterForm";
 import LoginForm from "../components/auth/LoginForm";
 
 export default function Auth() {
-  const { classes } = useStyles();
+  const { classes } = useFormStyles();
   const [showForm, setShowForm] = useState<boolean>(true);
   const [loginPage, setLoginPage] = useState<boolean>(false);
 

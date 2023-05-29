@@ -3,6 +3,8 @@ export interface Auth {
   id?: string;
   username: string;
   email: string;
+  isEmailConfirmed: boolean;
+  isCookiesConfirmed: boolean;
   registerStatus: string;
   registerError: object;
   loginStatus: string;
@@ -11,6 +13,7 @@ export interface Auth {
 }
 
 export interface User {
+  access_token?: string;
   id?: number;
   username: string;
   email: string;

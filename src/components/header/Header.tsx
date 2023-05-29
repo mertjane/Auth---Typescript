@@ -1,27 +1,29 @@
-import { GiGorilla } from "react-icons/gi";
 import { HeaderContainer } from "../../global.styles";
-import { useStyles } from "./header.styles";
-import { Group, Title, useMantineTheme, Button } from "@mantine/core";
+// import { useStyles } from "./header.styles";
+import { Group, Button } from "@mantine/core";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/auth/auth.reducer";
 
 export default function Header() {
-  const theme = useMantineTheme();
-  const { classes } = useStyles();
+  const dispatch = useDispatch();
   const { auth } = useSelector((state: any) => state);
   return (
     <HeaderContainer>
       <Group>
-        <GiGorilla size={45} className={classes.styledLogo} />
-        <Title className={classes.styledBrand} order={1}>
-          SmartApe
-        </Title>
+        <img src="https://i.ibb.co/Bs767YX/logo.png" alt="_logo" />
       </Group>
-      {auth.id ? (
+      {auth.registerStatus !== "succeeded" &&
+      !auth.isEmailConfirmed &&
+      auth.id ? (
         <Group>
-          <Button variant="filled" color={theme.primaryColor}>
+          <Button
+            onClick={() => dispatch(logout())}
+            variant="filled"
+            color="green"
+          >
             Logout
           </Button>
-          ;
         </Group>
       ) : (
         <></>

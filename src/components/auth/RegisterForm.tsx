@@ -1,9 +1,18 @@
 import { useEffect, useState } from "react";
-import { TextInput, Text, Button, Divider, Flex } from "@mantine/core";
-import { FaFacebook } from "react-icons/fa";
+import {
+  TextInput,
+  Text,
+  Button,
+  Divider,
+  Flex,
+  Checkbox,
+} from "@mantine/core";
+import signup from "../../assets/_SIGNUP.svg";
+import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import { SiApple } from "react-icons/si";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { useStyles } from "./form.styles";
+import { useFormStyles } from "./form.styles";
 import { REGEX, checkUsernameTaken, getValidationError } from "./auth.utils";
 import { FormProps, IsTouched, User } from "../../types/types";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +27,7 @@ export default function RegisterForm({
 }: FormProps) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { classes } = useStyles();
+  const { classes } = useFormStyles();
   const { auth } = useSelector((state: any) => state);
   const { registerError } = useSelector((state: any) => state.auth);
   const [usernameExist, setUsernameExist] = useState(false);
@@ -85,22 +94,13 @@ export default function RegisterForm({
     setTimeout(() => {
       setUser({ username: "", email: "", password: "", confirm: "" });
       setIsLoading(false);
-      navigate("/");
+      // navigate("/");
     }, 2000);
   };
 
   return (
     <>
-      <h1 className={classes.title}>
-        {loginPage === false ? "Signup" : "Login"}
-        <span
-          style={{
-            marginLeft: "3px",
-            border: "3px solid #008ef4",
-            width: "23%",
-          }}
-        />
-      </h1>
+      <img className={classes.title} src={signup} alt="_svg" />
       <TextInput
         type="text"
         className={classes.input}
@@ -165,14 +165,14 @@ export default function RegisterForm({
             <CheckMark />
           ) : showPassword ? (
             <FiEyeOff
-              onClick={() => setShowConfirm(false)}
-              size={17}
+              onClick={() => setShowPassword(false)}
+              size={14}
               className={classes.showBtn}
             />
           ) : (
             <FiEye
-              onClick={() => setShowConfirm(true)}
-              size={17}
+              onClick={() => setShowPassword(true)}
+              size={14}
               className={classes.showBtn}
             />
           )
@@ -196,64 +196,64 @@ export default function RegisterForm({
           ) : showConfirm ? (
             <FiEyeOff
               onClick={() => setShowConfirm(false)}
-              size={17}
+              size={14}
               className={classes.showBtn}
             />
           ) : (
             <FiEye
               onClick={() => setShowConfirm(true)}
-              size={17}
+              size={14}
               className={classes.showBtn}
             />
           )
         }
       />
+      <Checkbox
+        size="xs"
+        style={{
+          alignSelf: "flex-start",
+          cursor: "pointer",
+        }}
+        label={
+          <div>
+            I have read and agree{" "}
+            <span
+              onClick={() => navigate("/terms-of-service")}
+              style={{ color: "#228be6", cursor: "pointer" }}
+            >
+              Terms & Conditions
+            </span>
+          </div>
+        }
+      />
       <Button
         onClick={handleSubmit}
         size="lg"
+        color="green"
         className={classes.submitBtn}
         loading={isLoading}
       >
         Create an account
       </Button>
+      <Text className={classes.styledText} size="xs">
+        {loginPage === false
+          ? "Already have an account?"
+          : "Don't you have an account?"}
+        <span onClick={handlePageSwitch} className={classes.switchBtn}>
+          {loginPage === false ? " Login" : " Signup"}
+        </span>
+      </Text>
       <Divider
         className={classes.styledDivider}
         variant="solid"
         my="xs"
-        label="Or"
+        label="Signup with"
         labelPosition="center"
       />
-      <Button
-        size="lg"
-        className={classes.styledFacebookBtn}
-        leftIcon={
-          <>
-            <FaFacebook size="1.7rem" />
-            <span className={classes.buttonText}>Login with Facebook</span>
-          </>
-        }
-      />
-      <Button
-        variant="outline"
-        className={classes.styledGoogleBtn}
-        size="lg"
-        leftIcon={
-          <>
-            <FcGoogle size="1.7rem" />
-            <span className={classes.buttonText}>Login with Google</span>
-          </>
-        }
-      />
-
-      <Flex className={classes.flexBox}>
-        <Text className={classes.styledText} size="sm">
-          {loginPage === false
-            ? "Already have an account?"
-            : "Don't you have an account?"}
-          <span onClick={handlePageSwitch} className={classes.switchBtn}>
-            {loginPage === false ? " Login" : " Signup"}
-          </span>
-        </Text>
+      <Flex justify="center" align="center" direction="row" gap="md">
+        <FcGoogle size="3rem" className={classes.styledGoogleBtn} />
+        <FaGithub size="3rem" className={classes.styledGitBtn} />
+        <SiApple size="3rem" className={classes.styledAppeBtn} />
       </Flex>
     </>
   );
